@@ -26,7 +26,7 @@ if __name__ == '__main__':
 
 
     # import data
-    campaign_name, description =[], []
+    campaign_name, description, url = [], [], []
     with open('data/CampaignData_new_formatted.txt', 'r', encoding='utf-8') as f:
         data = json.loads(f.read())
 
@@ -48,10 +48,15 @@ if __name__ == '__main__':
 
     for i in data:
         campaign_name.append(i['campaign_name'])
+        url.append(i['url'])
         description.append(i['description'])
 
         # split description into sentences
-        pred_texts = i['description'].split('.')
+        pred_texts = []
+        texts = i['description'].strip('\n').strip()
+        texts = texts.split('\n')[0]
+        pred_texts.append(texts)
+        # print('pred_text', pred_texts)
 
         # Tokenize texts and create prediction data set
         tokenized_texts = tokenizer(pred_texts,truncation=True,padding=True)
@@ -122,5 +127,5 @@ if __name__ == '__main__':
 
 
     # Create DataFrame with texts, predictions, labels, and scores
-    df = pd.DataFrame(list(zip(sum_name, sum_desc, sum_pred, sum_label, sum_score,  anger, disgust, fear, joy, neutral, sadness, surprise)), columns=['name','description','pred','label','score', 'anger', 'disgust', 'fear', 'joy', 'neutral', 'sadness', 'surprise'])
-    df.to_csv('data/sentimental_analysis_split_by_period.csv', index=False)
+    df = pd.DataFrame(list(zip(sum_name, url, sum_desc, sum_pred, sum_label, sum_score,  anger, disgust, fear, joy, neutral, sadness, surprise)), columns=['name', 'url', 'description','pred','label','score', 'anger', 'disgust', 'fear', 'joy', 'neutral', 'sadness', 'surprise'])
+    df.to_csv('data/sentimental_analysis_1st_graph.csv', index=False)

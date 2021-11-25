@@ -103,4 +103,5 @@ This is a crawler, information extractor and sentimental analyzer for GoFundMe w
 ## Credits
 [emotion-english-distilroberta-base](https://huggingface.co/j-hartmann/emotion-english-distilroberta-base) for text sentimental analysis
 
+[distilbert-base-uncased-go-emotions-student](https://huggingface.co/joeddav/distilbert-base-uncased-go-emotions-student) for text sentimental analysis(GoEmotion)
 ## License
